@@ -2,13 +2,95 @@
 
 <body class="bg-gray-100">
 
-  <%- include('../partials/nav') %>
+<%- include('../partials/nav') %>
 
-  <!-- Heading -->
-  <section class="text-center py-12">
-    <h1 class="text-5xl font-bold text-gray-800">
-      🏡 Welcome to details
-    </h1>
+<div class="max-w-6xl mx-auto mt-12 bg-white rounded-xl shadow-lg overflow-hidden">
+
+    <div class="grid grid-cols-1 md:grid-cols-2">
+
+        <!-- Left Side -->
+        <div class="p-6 flex items-center justify-center bg-gray-50">
+
+            <img
+                src="<%= home.photo %>"
+                alt="<%= home.home %>"
+                class="rounded-lg w-full h-[420px] object-cover">
+
+        </div>
+
+        <!-- Right Side -->
+        <div class="p-8">
+
+            <h1 class="text-3xl font-bold text-red-500 mb-8">
+                Details of <%= home.home %>
+            </h1>
+
+            <!-- Description -->
+            <div class="pb-6 border-b">
+                <h2 class="font-bold text-xl mb-3">
+                    Description
+                </h2>
+
+                <p class="text-gray-600 leading-7">
+                    <%= home.description %>
+                </p>
+            </div>
+
+            <!-- Location -->
+            <div class="py-6 border-b">
+
+                <h2 class="font-bold text-xl mb-2">
+                    Location
+                </h2>
+
+                <p class="text-gray-500">
+                    📍 <%= home.location %>
+                </p>
+
+            </div>
+
+            <!-- Price -->
+            <div class="py-6 border-b">
+
+                <h2 class="font-bold text-xl mb-2">
+                    Price
+                </h2>
+
+                <p class="text-3xl font-bold text-green-600">
+                    ₹<%= home.price %>
+                    <span class="text-lg font-medium text-gray-500">
+                        / night
+                    </span>
+                </p>
+
+            </div>
+
+            <!-- Rating -->
+            <div class="py-6">
+
+                <h2 class="font-bold text-xl mb-2">
+                    Rating
+                </h2>
+
+                <p class="text-yellow-500 text-xl font-semibold">
+                    ⭐ <%= home.rating %> / 5
+                </p>
+
+            </div>
+
+            <!-- Button -->
+            <div>
+                <form action="/favourite">
+                    <button type="submit" class="bg-orange-300 hover:bg-orange-500 p-3">Add to favourites</button>
+                    <input type="hidden" name="id" value="<%= home.id %>">
+                </form>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
 </body>
-
 </html>

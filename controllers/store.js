@@ -14,5 +14,14 @@ exports.getAirbnbPage= (req, res, next) => {
 exports.getDetailsPage=(req,res,next)=>{
   const homeId=req.params.houseid;
   console.log("Unique id",homeId);
-  res.render('store/detail', { pageTitle: "home" });
+  House.findById(homeId,home=>{
+    if(!home){
+      console.log("Home not found error");
+      res.redirect('/home');
+    }
+    else{
+      console.log("Home details found",home);
+      res.render('store/detail', { home,pageTitle: "home" });
+    }
+  })
 }
