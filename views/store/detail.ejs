@@ -12,7 +12,7 @@
         <div class="p-6 flex items-center justify-center bg-gray-50">
 
             <img
-                src="<%= home.photo %>"
+                src="/<%= home.photo %>"
                 alt="<%= home.home %>"
                 class="rounded-lg w-full h-[420px] object-cover">
 
@@ -79,13 +79,7 @@
             </div>
 
             <!-- Button -->
-            <div>
-                <form action="/favourite">
-                    <button type="submit" class="bg-orange-300 hover:bg-orange-500 p-3">Add to favourites</button>
-                    <input type="hidden" name="id" value="<%= home.id %>">
-                </form>
-            </div>
-
+             <%- include('../partials/favouriteTracker') %>
         </div>
 
     </div>

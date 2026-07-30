@@ -1,10 +1,4 @@
-//core moduels
-const fs = require('fs');
-const path = require('path');
-//local module
-const rootDir = require('../utils/pathUtil');
-//path 
- const homeDataPath = path.join(rootDir, 'data', 'homes.json');
+const db = require('../utils/databaseUtil');
 module.exports = class House {
   constructor(home, photo, price, location, rating, description) {
     this.home = home;
@@ -13,32 +7,50 @@ module.exports = class House {
     this.location = location;
     this.rating = rating;
     this.description = description;
+    this.id=this.id;
   }
-  save() {
-    this.id=Math.random().toString();
-    House.fetchAll(regHouses => {
-      regHouses.push(this);
-      const homeDataPath = path.join(rootDir, 'data', 'homes.json');
-      fs.writeFile(homeDataPath, JSON.stringify(regHouses), error => {
-        console.log("file Writing concluded", error);
-      });
-    })
+save() {
+  if (this.id) {
+    // Editing existing home
+    return db.execute(
+      `UPDATE homes 
+       SET home=?, photo=?, price=?, location=?, rating=?, description=?
+       WHERE id=?`,
+      [
+        this.home,
+        this.photo,
+        this.price,
+        this.location,
+        this.rating,
+        this.description,
+        this.id
+      ]
+    );
+  } 
+  else {
+    // Adding new home
+    return db.execute(
+      `INSERT INTO homes 
+       (home, photo, price, location, rating, description)
+       VALUES (?, ?, ?, ?, ?, ?)`,
+      [
+        this.home,
+        this.photo,
+        this.price,
+        this.location,
+        this.rating,
+        this.description
+      ]
+    );
   }
-  static fetchAll(callback) {
-    fs.readFile(homeDataPath, (err, data) => {
-      console.log("file read: ", err, data);
-      if (!err) {
-        callback(JSON.parse(data));
-      }
-      else {
-        callback([]);
-      }
-    }); 
+}
+  static fetchAll() {
+    return db.execute('Select * FROM homes');
   }
-  static findById(homeId,callback){
-    this.fetchAll(homes =>{
-      const homeFound = homes.find(home => home.id === homeId);
-      callback(homeFound);
-    })
+  static findById(homeId) {
+    return db.execute('Select * FROM homes where id=?',[homeId]);
+  }
+  static deleteHome(homeId) {
+    return db.execute('delete  FROM homes where id=?',[homeId]);
   }
 }

@@ -1,82 +1,110 @@
 <%- include('../partials/head') %>
 
-<body class="bg-gray-100">
+<body class="bg-gray-100 min-h-screen">
 
   <%- include('../partials/nav') %>
 
   <!-- Heading -->
-  <section class="text-center py-12">
-    <h1 class="text-5xl font-bold text-gray-800">
-      🏡 Favourites
+  <section class="text-center py-10">
+    <h1 class="text-4xl font-bold text-gray-800">
+      ❤️ My Favourite Homes
     </h1>
+    <p class="text-gray-500 mt-2">
+      Your saved stays in one place.
+    </p>
   </section>
 
-  <!-- Cards -->
   <div class="max-w-7xl mx-auto px-6 pb-10">
 
-    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+    <% if (favHouses.length === 0) { %>
 
-      <% regHouses.forEach(house => { %>
+      <div class="text-center py-20">
+        <div class="text-7xl mb-4">💔</div>
 
-      <div
-        class="bg-white rounded-3xl overflow-hidden shadow-md hover:shadow-2xl hover:-translate-y-2 transition-all duration-300">
+        <h2 class="text-3xl font-bold text-gray-700">
+          No Favourite Homes Yet
+        </h2>
 
-        <!-- Image -->
-        <img
-          src="<%= house.photo %>"
-          alt="<%= house.home %>"
-          class="w-full h-60 object-cover">
+        <p class="text-gray-500 mt-3">
+          Browse homes and add your favourites to see them here.
+        </p>
 
-        <!-- Content -->
-        <div class="p-5">
+        <a
+          href="/"home
+          class="inline-block mt-6 bg-orange-500 hover:bg-orange-600 text-white px-6 py-3 rounded-xl transition">
+          Explore Homes
+        </a>
+      </div>
 
-          <div class="flex justify-between items-start">
+    <% } else { %>
 
-            <div>
-              <h2 class="text-2xl font-bold text-gray-800">
-                <%= house.home %>
-              </h2>
+      <!-- Cards Grid -->
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
 
-              <p class="text-gray-500 mt-1">
-                📍 <%= house.location %>
+        <% favHouses.forEach(house => { %>
+
+          <div class="bg-white rounded-3xl overflow-hidden shadow-lg hover:shadow-2xl hover:-translate-y-2 transition duration-300">
+
+            <img
+              src="<%= house.photo %>"
+              alt="<%= house.home %>"
+              class="w-full h-60 object-cover">
+
+            <div class="p-5">
+
+              <div class="flex justify-between items-start">
+
+                <div>
+                  <h2 class="text-2xl font-bold text-gray-800">
+                    <%= house.home %>
+                  </h2>
+
+                  <p class="text-gray-500 mt-1">
+                    📍 <%= house.location %>
+                  </p>
+                </div>
+
+                <span class="bg-yellow-100 text-yellow-700 px-3 py-1 rounded-full font-semibold">
+                  ⭐ <%= house.rating %>
+                </span>
+
+              </div>
+
+              <p class="text-gray-600 mt-4">
+                <%= house.description %>
               </p>
-            </div>
 
-            <span
-              class="bg-yellow-100 text-yellow-700 px-3 py-1 rounded-full font-semibold">
-              ⭐ <%= house.rating %>
-            </span>
+              <div class="border-t mt-5 pt-4 flex justify-between items-center">
+
+                <div>
+                  <span class="text-3xl font-bold text-red-500">
+                    ₹<%= house.price %>
+                  </span>
+
+                  <span class="text-gray-500">
+                    / night
+                  </span>
+                </div>
+
+                <form action="/favourite/remove/<%= house.id %>" method="POST">
+                  <button type="submit">
+                    remove from favourite
+                  </button>
+                </form>
+
+              </div>
+
+            </div>
 
           </div>
 
-          <p class="text-gray-600 mt-4 leading-relaxed">
-            <%= house.description %>
-          </p>
-
-          <div class="border-t mt-5 pt-4 flex justify-between items-center">
-
-            <div>
-              <span class="text-3xl font-bold text-red-500">
-                ₹<%= house.price %>
-              </span>
-
-              <span class="text-gray-500">
-                / night
-              </span>
-            </div>
-
-          </div>
-          <button class="bg-green-300 p-3 m-0.5">Book</button>
-
-        </div>
+        <% }) %>
 
       </div>
 
-      <% }) %>
-    </div>
+    <% } %>
 
   </div>
 
 </body>
-
 </html>

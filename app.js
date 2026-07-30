@@ -11,11 +11,6 @@ const app=express();
 
 app.set('view engine','ejs');
 app.set('views','views');  // optional it is default
-
-app.use((req,res,next)=>{
-  console.log(req.url,req.method);
-  next();
-});
 app.use(express.static(path.join(rootDir,'public')));
 app.use(express.urlencoded());
 app.use(storeRouter);
