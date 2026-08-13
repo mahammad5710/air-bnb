@@ -1,37 +1,37 @@
 //core moduels
-const fs = require('fs');
-const path = require('path');
-//local module
-const rootDir = require('../utils/pathUtil');
-//path 
-const favouriteDataPath = path.join(rootDir, 'data', 'favourites.json');
-module.exports = class Favourite {
-  static addToFavourite(id, callback) {
-    Favourite.GetFavourites(favHouses => {
-      if (favHouses.includes(id)) {
-        callback("Home exists in favourites");
-      }
-      else {
-        favHouses.push(id);
-        fs.writeFile(favouriteDataPath, JSON.stringify(favHouses), callback);
-      }
-    })
+const mongoose = require('mongoose');
+
+const favouriteSchema = new mongoose.Schema({
+  houseId: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'House',
+    required: true,
+    unique: true
   }
-  static GetFavourites(callback) {
-    fs.readFile(favouriteDataPath, "utf8", (err, data) => {
-      if (err) {
-        return callback([]);
-      }
-      if (!data.trim()) {
-        return callback([]);
-      }
-      callback(JSON.parse(data));
-    });
-  }
-  static deleteFavourite(homeId,callback){
-      Favourite.GetFavourites(favs =>{
-        const newFav=favs.filter(fav => fav !== homeId);
-          fs.writeFile(favouriteDataPath, JSON.stringify(newFav),callback);
-      })
-    }
-};
+});
+
+module.exports = mongoose.model('Favourite', favouriteSchema);
+// module.exports = class Favourite {
+//   constructor(home_id) {
+//     this.home_id=home_id;
+//   }
+//   save(){
+//     const db=getDB();
+//     return db.collection('favourites').findOne({home_id:this.home_id}).then(existingFav=>{
+//       if(!existingFav){
+//         return db.collection('favourites').insertOne(this);
+//       }
+//       else{
+//         return Promise.resolve();
+//       }
+//     })
+//   }
+//   static GetFavourites(callback) {
+//     const db=getDB();
+//     return db.collection('favourites').find().toArray();
+//   }
+//   static deleteFavourite(del_id) {
+//    const db=getDB();
+//    return db.collection('favourites').deleteOne({home_id:del_id});
+//   }
+// };

@@ -21,6 +21,8 @@
     "@tailwindcss/cli": "^4.3.3",
     "ejs": "^6.0.1",
     "express": "^5.2.1",
+    "mongodb": "^7.5.0",
+    "mongoose": "^9.9.1",
     "mysql2": "^3.23.2",
     "tailwindcss": "^4.3.3"
   }

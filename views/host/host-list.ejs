@@ -82,13 +82,13 @@
           <div class="flex gap-3 mt-6">
 
             <a
-              href="/host/edit-home/<%= house.id %>?editing=true"
+              href="/host/edit-home/<%= house._id %>?editing=true"
               class="flex-1 bg-blue-600 hover:bg-blue-700 text-white text-center font-semibold py-3 rounded-lg transition duration-300">
               ✏️ Edit
             </a>
 
             <form
-              action="/host/delete-home/<%= house.id %>"
+              action="/host/delete-home/<%= house._id %>"
               method="POST"
               class="flex-1">
 

@@ -7,10 +7,10 @@
     <h1 class="text-3xl font-bold text-center text-red-500 mb-6">
       <%= editing ? "Edit your Home":"Enter your home details here" %>
     </h1>
-    <form action="/host<%= editing ? "/edit-home" : "/add-home" %>"/add-home" method="POST" class="flex flex-col gap-4">
+    <form action="/host<%= editing ? "/edit-home" : "/add-home" %>" method="POST" class="flex flex-col gap-4">
 
   <!-- Home Name -->
-   <input type="hidden" name="id" value="<%= editing ? home.id : "" %>">
+   <input type="hidden" name="_id" value="<%= editing ? home._id : "" %>">
   <input
     type="text"
     name="home"
