@@ -13,4 +13,11 @@ exports.getLogout = (req, res, next) => {
     res.redirect('/login');
   })
 };
+exports.getSignUpPage = (req, res, next) => {
+  res.render('auth/signup', { pageTitle: "signup",isLoggedIn:false});
+};
+exports.getSignUpSucessPage = (req, res, next) => {
+  console.log("User details are :",req.body);
+  res.redirect('/login');
+};
 

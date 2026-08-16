@@ -1,0 +1,346 @@
+<%- include('../partials/head') %>
+
+<body class="bg-gray-100">
+
+  <%- include('../partials/nav') %>
+
+  <!-- Signup Page -->
+  <main class="min-h-[calc(100vh-80px)] flex items-center justify-center px-4 py-10">
+
+    <div class="w-full max-w-lg">
+
+      <!-- Signup Card -->
+      <div class="bg-white rounded-2xl shadow-xl border border-gray-200 overflow-hidden">
+
+        <!-- Accent bar -->
+        <div class="h-1.5 bg-gradient-to-r from-red-400 via-red-500 to-red-600"></div>
+
+        <!-- Header -->
+        <div class="text-center px-8 pt-8 pb-6 border-b border-gray-100">
+
+          <div class="w-12 h-12 rounded-full bg-red-50 flex items-center justify-center mx-auto mb-4">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6 text-red-500">
+              <path d="M12 2.2c-.6 0-1.1.3-1.5.8L4.6 11c-1 1.3-1.5 2.9-1.5 4.5C3.1 19.1 6 22 9.6 22c1.6 0 3-.6 4.1-1.6.4-.4 1-.4 1.4 0 1.1 1 2.5 1.6 4.1 1.6 3.6 0 6.5-2.9 6.5-6.5 0-1.6-.5-3.2-1.5-4.5l-5.9-8c-.4-.5-.9-.8-1.5-.8h-4.8z"/>
+            </svg>
+          </div>
+
+          <h1 class="text-3xl font-bold text-gray-800">
+            Create your account
+          </h1>
+
+          <p class="text-gray-500 mt-2">
+            Join our Airbnb community
+          </p>
+
+        </div>
+
+
+        <!-- Form -->
+        <form action="/signup" method="POST" class="px-8 py-8 space-y-5">
+
+
+          <!-- First Name + Last Name -->
+          <div>
+
+            <label class="block text-sm font-semibold text-gray-700 mb-2">
+              Full name
+            </label>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+
+              <input
+                type="text"
+                name="firstName"
+                placeholder="First name"
+                required
+                class="w-full px-4 py-3 rounded-xl border border-gray-300
+                       outline-none focus:border-red-500 focus:ring-2
+                       focus:ring-red-100 transition"
+              >
+
+              <input
+                type="text"
+                name="lastName"
+                placeholder="Last name"
+                required
+                class="w-full px-4 py-3 rounded-xl border border-gray-300
+                       outline-none focus:border-red-500 focus:ring-2
+                       focus:ring-red-100 transition"
+              >
+
+            </div>
+
+          </div>
+
+
+          <!-- Email -->
+          <div>
+
+            <label
+              for="email"
+              class="block text-sm font-semibold text-gray-700 mb-2"
+            >
+              Email address
+            </label>
+
+            <div class="relative">
+              <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-gray-400 absolute left-4 top-1/2 -translate-y-1/2 pointer-events-none" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 6.75c0-.83.67-1.5 1.5-1.5h16.5c.83 0 1.5.67 1.5 1.5v10.5c0 .83-.67 1.5-1.5 1.5H3.75a1.5 1.5 0 0 1-1.5-1.5V6.75Z" />
+                <path stroke-linecap="round" stroke-linejoin="round" d="m3 7 9 6 9-6" />
+              </svg>
+              <input
+                id="email"
+                type="email"
+                name="email"
+                placeholder="Enter your email"
+                required
+                autocomplete="email"
+                class="w-full pl-11 pr-4 py-3 rounded-xl border border-gray-300
+                       outline-none focus:border-red-500 focus:ring-2
+                       focus:ring-red-100 transition"
+              >
+            </div>
+
+          </div>
+
+
+          <!-- Password -->
+          <div>
+
+            <label
+              for="password"
+              class="block text-sm font-semibold text-gray-700 mb-2"
+            >
+              Password
+            </label>
+
+            <div class="relative">
+              <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-gray-400 absolute left-4 top-1/2 -translate-y-1/2 pointer-events-none" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M16.5 10.5V6.75a4.5 4.5 0 1 0-9 0v3.75m-.75 9h10.5a1.5 1.5 0 0 0 1.5-1.5v-6a1.5 1.5 0 0 0-1.5-1.5H6.75a1.5 1.5 0 0 0-1.5 1.5v6a1.5 1.5 0 0 0 1.5 1.5Z" />
+              </svg>
+              <input
+                id="password"
+                type="password"
+                name="password"
+                placeholder="Create a password"
+                minlength="6"
+                required
+                autocomplete="new-password"
+                class="w-full pl-11 pr-11 py-3 rounded-xl border border-gray-300
+                       outline-none focus:border-red-500 focus:ring-2
+                       focus:ring-red-100 transition"
+              >
+              <button type="button" data-toggle="password"
+                class="absolute right-4 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600">
+                <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M2.036 12.322a1.012 1.012 0 0 1 0-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178Z" />
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
+                </svg>
+              </button>
+            </div>
+            <p class="text-xs text-gray-400 mt-1.5">Use at least 6 characters</p>
+
+          </div>
+
+
+          <!-- Confirm Password -->
+          <div>
+
+            <label
+              for="confirmPassword"
+              class="block text-sm font-semibold text-gray-700 mb-2"
+            >
+              Confirm password
+            </label>
+
+            <div class="relative">
+              <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-gray-400 absolute left-4 top-1/2 -translate-y-1/2 pointer-events-none" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M16.5 10.5V6.75a4.5 4.5 0 1 0-9 0v3.75m-.75 9h10.5a1.5 1.5 0 0 0 1.5-1.5v-6a1.5 1.5 0 0 0-1.5-1.5H6.75a1.5 1.5 0 0 0-1.5 1.5v6a1.5 1.5 0 0 0 1.5 1.5Z" />
+              </svg>
+              <input
+                id="confirmPassword"
+                type="password"
+                name="confirmPassword"
+                placeholder="Confirm your password"
+                minlength="6"
+                required
+                autocomplete="new-password"
+                class="w-full pl-11 pr-11 py-3 rounded-xl border border-gray-300
+                       outline-none focus:border-red-500 focus:ring-2
+                       focus:ring-red-100 transition"
+              >
+              <button type="button" data-toggle="confirmPassword"
+                class="absolute right-4 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600">
+                <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M2.036 12.322a1.012 1.012 0 0 1 0-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178Z" />
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
+                </svg>
+              </button>
+            </div>
+
+          </div>
+
+
+          <!-- User Type -->
+          <div>
+
+            <label class="block text-sm font-semibold text-gray-700 mb-3">
+              Choose your account type
+            </label>
+
+            <div class="grid grid-cols-2 gap-4">
+
+
+              <!-- Guest -->
+              <label class="cursor-pointer">
+
+                <input
+                  type="radio"
+                  name="userType"
+                  value="guest"
+                  checked
+                  class="peer sr-only"
+                >
+
+                <div class="border-2 border-gray-200 rounded-xl p-4
+                            text-center transition
+                            hover:border-gray-300
+                            peer-checked:border-red-500
+                            peer-checked:bg-red-50
+                            peer-checked:shadow-sm">
+
+                  <div class="text-2xl mb-2">
+                    🧳
+                  </div>
+
+                  <p class="font-semibold text-gray-800">
+                    Guest
+                  </p>
+
+                  <p class="text-xs text-gray-500 mt-1">
+                    Find and book stays
+                  </p>
+
+                </div>
+
+              </label>
+
+
+              <!-- Host -->
+              <label class="cursor-pointer">
+
+                <input
+                  type="radio"
+                  name="userType"
+                  value="host"
+                  class="peer sr-only"
+                >
+
+                <div class="border-2 border-gray-200 rounded-xl p-4
+                            text-center transition
+                            hover:border-gray-300
+                            peer-checked:border-red-500
+                            peer-checked:bg-red-50
+                            peer-checked:shadow-sm">
+
+                  <div class="text-2xl mb-2">
+                    🏡
+                  </div>
+
+                  <p class="font-semibold text-gray-800">
+                    Host
+                  </p>
+
+                  <p class="text-xs text-gray-500 mt-1">
+                    List your property
+                  </p>
+
+                </div>
+
+              </label>
+
+            </div>
+
+          </div>
+
+
+          <!-- Terms & Conditions -->
+          <div class="flex items-start gap-3 pt-1">
+
+            <input
+              id="terms"
+              type="checkbox"
+              name="terms"
+              value="accepted"
+              required
+              class="mt-1 w-4 h-4 accent-red-500 cursor-pointer"
+            >
+
+            <label
+              for="terms"
+              class="text-sm text-gray-600 leading-5"
+            >
+              I agree to the
+              <a
+                href="/terms"
+                class="text-red-500 font-semibold hover:underline"
+              >
+                Terms & Conditions
+              </a>
+              and
+              <a
+                href="/privacy"
+                class="text-red-500 font-semibold hover:underline"
+              >
+                Privacy Policy
+              </a>.
+            </label>
+
+          </div>
+
+
+          <!-- Submit Button -->
+          <button
+            type="submit"
+            class="w-full bg-red-500 text-white py-3.5 rounded-xl
+                   font-semibold text-lg shadow-md
+                   hover:bg-red-600 hover:shadow-lg
+                   active:scale-[0.98]
+                   transition duration-200"
+          >
+            Create account
+          </button>
+
+
+          <!-- Login Link -->
+          <p class="text-center text-sm text-gray-600 pt-2">
+
+            Already have an account?
+
+            <a
+              href="/login"
+              class="text-red-500 font-semibold hover:underline"
+            >
+              Log in
+            </a>
+
+          </p>
+
+        </form>
+
+      </div>
+
+    </div>
+
+  </main>
+
+  <script>
+    document.querySelectorAll('[data-toggle]').forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        var input = document.getElementById(btn.getAttribute('data-toggle'));
+        input.type = input.type === 'password' ? 'text' : 'password';
+      });
+    });
+  </script>
+
+</body>
