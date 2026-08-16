@@ -1,55 +1,72 @@
- <header class="bg-red-500 text-white p-4 shadow-md">
-    <nav class="container mx-auto flex justify-between items-center">
+<header class="bg-red-500 text-white shadow-lg">
+  <nav class="container mx-auto px-6 py-4 flex justify-between items-center">
 
-      <ul class="flex space-x-4">
-         <li>
-          <a
-            href="/"
-            class="<%= pageTitle === 'airbnb' ? 'bg-red-400' :  'hover:bg-red-400' %> py-2 px-4 rounded transition duration-300"
-          >
-            airbnb
-          </a>
-        </li>
-        <li>
-          <a
-            href="/home"
-            class="<%= pageTitle === 'Home' ? 'bg-red-400' :  'hover:bg-red-400' %> py-2 px-4 rounded transition duration-300"
-          >
-            Home
-          </a>
-        </li>
-        <li>
-          <a
-            href="/bookings"
-            class="<%= pageTitle === 'bookings' ? 'bg-red-400' :  'hover:bg-red-400' %> py-2 px-4 rounded transition duration-300"
-          >
-            Bookings
-          </a>
-        </li>
-        <li>
-          <a
-            href="/favourite"
-            class="<%= pageTitle === 'favourite' ? 'bg-red-400' :  'hover:bg-red-400' %> py-2 px-4 rounded transition duration-300"
-          >
-            Favourite
-          </a>
-        </li>
-          <li>
-          <a
-            href="/host/add-home"
-            class="<%= pageTitle === 'add-Home' ? 'bg-red-400' :  'hover:bg-red-400' %> py-2 px-4 rounded transition duration-300"
-          >
-            Add Home
-          </a>
-        </li>
-          <li>
-          <a
-            href="/host/host-list"
-            class="<%= pageTitle === 'host-list' ? 'bg-red-400' :  'hover:bg-red-400' %> py-2 px-4 rounded transition duration-300"
-          >
-            Host-list
-          </a>
-        </li>
-      </ul>
-    </nav>
-  </header>
+    <!-- Navigation -->
+    <ul class="flex items-center gap-2">
+
+      <li>
+        <a
+          href="/"
+          class="<%= pageTitle === 'airbnb' ? 'bg-white text-red-500 shadow-sm' : 'text-white hover:bg-red-400' %> px-4 py-2 rounded-lg font-semibold transition-all duration-300"
+        >
+          airbnb
+        </a>
+      </li>
+
+      <li>
+        <a
+          href="/home"
+          class="<%= pageTitle === 'Home' ? 'bg-white text-red-500 shadow-sm' : 'text-white hover:bg-red-400' %> px-4 py-2 rounded-lg font-medium transition-all duration-300"
+        >
+          Home
+        </a>
+      </li>
+
+      <li>
+        <a
+          href="/bookings"
+          class="<%= pageTitle === 'bookings' ? 'bg-white text-red-500 shadow-sm' : 'text-white hover:bg-red-400' %> px-4 py-2 rounded-lg font-medium transition-all duration-300"
+        >
+          Bookings
+        </a>
+      </li>
+
+      <li>
+        <a
+          href="/favourite"
+          class="<%= pageTitle === 'favourite' ? 'bg-white text-red-500 shadow-sm' : 'text-white hover:bg-red-400' %> px-4 py-2 rounded-lg font-medium transition-all duration-300"
+        >
+          Favourite
+        </a>
+      </li>
+
+      <li>
+        <a
+          href="/host/add-home"
+          class="<%= pageTitle === 'add-Home' ? 'bg-white text-red-500 shadow-sm' : 'text-white hover:bg-red-400' %> px-4 py-2 rounded-lg font-medium transition-all duration-300"
+        >
+          Add Home
+        </a>
+      </li>
+
+      <li>
+        <a
+          href="/host/host-list"
+          class="<%= pageTitle === 'host-list' ? 'bg-white text-red-500 shadow-sm' : 'text-white hover:bg-red-400' %> px-4 py-2 rounded-lg font-medium transition-all duration-300"
+        >
+          Host-list
+        </a>
+      </li>
+
+    </ul>
+
+    <!-- Login -->
+    <a
+      href="/login"
+      class="ml-6 bg-white text-red-500 px-6 py-2.5 rounded-full font-semibold shadow-md hover:bg-gray-100 hover:shadow-lg hover:-translate-y-0.5 transition-all duration-300"
+    >
+      Login
+    </a>
+
+  </nav>
+</header>

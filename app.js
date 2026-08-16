@@ -4,6 +4,7 @@ const dns=require('dns');
 //local modules
 const storeRouter=require('./routes/storeRouter');
 const hostRouter=require('./routes/hostRouter');
+const authRouter=require('./routes/authRouter');
 const {getErrorPage}=require('./controllers/errors');
 const rootDir=require('./utils/pathUtil');
 //core modules
@@ -17,6 +18,7 @@ app.set('views','views');  // optional it is default
 app.use(express.static(path.join(rootDir,'public')));
 app.use(express.urlencoded());
 app.use(storeRouter);
+app.use(authRouter);
 app.use("/host",hostRouter);
 app.use(getErrorPage);
 const PORT=7777;
