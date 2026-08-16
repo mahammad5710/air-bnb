@@ -1,6 +1,6 @@
 const House = require('../models/homes');
 exports.getAddHomePage = (req, res, next) => {
-  res.render('host/edit-home', { pageTitle: "add-Home", editing: false });
+  res.render('host/edit-home', { pageTitle: "add-Home", editing: false ,isLoggedIn:req.isLoggedIn});
 };
 exports.getSucessPage = (req, res, next) => {
   const { home, photo, price, location, rating, description } = req.body;
@@ -13,7 +13,7 @@ exports.getSucessPage = (req, res, next) => {
   res.redirect('/host/host-list');
 };
 exports.getHostListPage = (req, res, next) => {
-  House.find().then((regHouses) => res.render('host/host-list', { regHouses, pageTitle: "host-list" }));;
+  House.find().then((regHouses) => res.render('host/host-list', { regHouses, pageTitle: "host-list" ,isLoggedIn:req.isLoggedIn}));;
 };
 exports.getEditHomePage = (req, res, next) => {
   const homeId = req.params.homeId;
@@ -25,7 +25,7 @@ exports.getEditHomePage = (req, res, next) => {
     }
     else {
       console.log(homeId, editing, home);
-      res.render('host/edit-home', { home, pageTitle: "edit-home", editing });
+      res.render('host/edit-home', { home, pageTitle: "edit-home", editing,isLoggedIn:req.isLoggedIn});
     }
   })
 };

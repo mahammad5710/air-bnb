@@ -3,7 +3,6 @@
 
     <!-- Navigation -->
     <ul class="flex items-center gap-2">
-
       <li>
         <a
           href="/"
@@ -12,8 +11,8 @@
           airbnb
         </a>
       </li>
-
-      <li>
+      <% if(isLoggedIn) {  %>
+        <li>
         <a
           href="/home"
           class="<%= pageTitle === 'Home' ? 'bg-white text-red-500 shadow-sm' : 'text-white hover:bg-red-400' %> px-4 py-2 rounded-lg font-medium transition-all duration-300"
@@ -30,7 +29,6 @@
           Bookings
         </a>
       </li>
-
       <li>
         <a
           href="/favourite"
@@ -57,16 +55,26 @@
           Host-list
         </a>
       </li>
-
+    <% } %>
     </ul>
 
     <!-- Login -->
-    <a
+     <% if(!isLoggedIn){ %>
+      <a
       href="/login"
       class="ml-6 bg-white text-red-500 px-6 py-2.5 rounded-full font-semibold shadow-md hover:bg-gray-100 hover:shadow-lg hover:-translate-y-0.5 transition-all duration-300"
     >
       Login
     </a>
-
+     <% } else { %>
+       <form action="/logout" method="POST" class="ml-6">
+    <button
+      type="submit"
+      class="bg-red-500 text-white px-6 py-2.5 rounded-full font-semibold shadow-md hover:bg-red-600 hover:shadow-lg hover:-translate-y-0.5 transition-all duration-300"
+    >
+      Logout
+    </button>
+  </form>
+     <%}%>
   </nav>
 </header>
