@@ -1,23 +1,22 @@
 const House = require('../models/homes');
-const Favourite = require('../models/favourites');
+const User = require('../models/user');
 exports.getHomePage = (req, res, next) => {
   House.find().then((regHouses) => {
-    res.render('store/home-list', { regHouses, pageTitle: "Home", isLoggedIn: req.isLoggedIn })
+    res.render('store/home-list', { regHouses, pageTitle: "Home", isLoggedIn: req.isLoggedIn, user: req.session.user });
   }).catch(err => {
     console.log("Error while readig from database", err);
   })
 };
 exports.getBookingPage = (req, res, next) => {
-  House.find().then((regHouses) => res.render('store/bookings', { regHouses, pageTitle: "bookings", isLoggedIn: req.isLoggedIn }));;
+  House.find().then((regHouses) => res.render('store/bookings', { regHouses, pageTitle: "bookings", isLoggedIn: req.isLoggedIn, user: req.session.user }));;
 };
-exports.getFavouritePage = (req, res, next) => {
-  Favourite.find().populate('houseId').then(favourites => {
-    const favHouses = favourites.map(fav => fav.houseId);
-    res.render('store/favourite', { favHouses, pageTitle: "favourite", isLoggedIn: req.isLoggedIn });
-  });
+exports.getFavouritePage = async (req, res, next) => {
+  const userId=req.session.user._id;
+  const  user = await User.findById(userId).populate('favourites');
+  res.render('store/favourite', { favHouses: user.favourites, pageTitle: "favourite", isLoggedIn: req.isLoggedIn, user: req.session.user });
 };
 exports.getAirbnbPage = (req, res, next) => {
-  const regHouses = House.find().then((regHouses => res.render('store/index', { regHouses, pageTitle: "airbnb", isLoggedIn: req.isLoggedIn })));;
+  const regHouses = House.find().then((regHouses => res.render('store/index', { regHouses, pageTitle: "airbnb", isLoggedIn: req.isLoggedIn, user: req.session.user })));;
 };
 exports.getDetailsPage = (req, res, next) => {
   const homeId = req.params.houseid;
@@ -27,34 +26,29 @@ exports.getDetailsPage = (req, res, next) => {
       res.redirect('/home');
     }
     else {
-      res.render('store/detail', { home, pageTitle: "home", isLoggedIn: req.isLoggedIn });
+      res.render('store/detail', { home, pageTitle: "home", isLoggedIn: req.isLoggedIn, user: req.session.user });
     }
   }).catch(err => {
     console.log("error while detailing the page", err);
   })
 }
-exports.addToFavouritePage = (req, res, next) => {
+exports.addToFavouritePage = async (req, res, next) => {
   const homeId = req.body.id;
-  Favourite.findOne({ houseId: homeId }).then((ext) => {
-    if (ext) {
-      return res.redirect("/favourite");
-    }
-    const fav = new Favourite({ houseId: homeId });
-    return fav.save();
-  }).then(() => {
-    res.redirect("favourite");
-  }).catch((err) => {
-    console.log("Error while adding to favourites");
-  })
+  const userId = req.session.user._id;
+  const user = await User.findById(userId);
+  if(!user.favourites.includes(homeId)) {
+    user.favourites.push(homeId);
+    await user.save();
+  }
+  res.redirect('/favourite');
 }
-exports.getRemoveFav = (req, res, next) => {
+exports.getRemoveFav =async (req, res, next) => {
   const homeId = req.params.houseid;
-  console.log("This is unfav", homeId);
-  Favourite.findOneAndDelete({ houseId: homeId }).then(result => {
-    console.log("fav removed sucessfully", result);
-  }).catch(err => {
-    console.log("Error while removing from favourites", err);
-  }).finally(() => {
-    res.redirect('/favourite');
-  })
+  const userId = req.session.user._id;
+  const user = await User.findById(userId);
+  if(user.favourites.includes(homeId)){
+    user.favourites=user.favourites.filter(fav=>fav != homeId);
+    await user.save();
+  }
+  res.redirect('/favourite');
 }

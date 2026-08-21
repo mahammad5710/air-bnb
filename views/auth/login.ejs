@@ -35,6 +35,7 @@
         </div>
 
         <form action="/login" method="POST" class="space-y-5">
+          <%- include('../partials/errorShow') %>
 
           <!-- Email -->
           <div>
@@ -51,10 +52,11 @@
                 <path stroke-linecap="round" stroke-linejoin="round" d="m3 7 9 6 9-6" />
               </svg>
               <input
-                type="text"
+                type="email"
                 id="email"
-                name="username"
-                placeholder="Enter your user name"
+                name="email"
+                value="<%= oldInput.email ? oldInput.email : '' %>"
+                placeholder="Enter your email"
                 required
                 autocomplete="email"
                 class="w-full pl-11 pr-4 py-3 rounded-xl border border-gray-300
